@@ -1,0 +1,34 @@
+version: "3.5"
+
+
+
+services:
+  diun:
+    container_name: diun
+    image: crazymax/diun:latest
+    restart: always
+    command: serve
+    environment:
+      - "TZ=${TZ}"
+      - "LOG_LEVEL=${LOG_LEVEL}"
+      - "LOG_JSON=${LOG_JSON}"
+      - "DIUN_WATCH_WORKERS=${DIUN_WATCH_WORKERS}"
+      - "DIUN_WATCH_SCHEDULE=${DIUN_WATCH_SCHEDULE}"
+      - "DIUN_PROVIDERS_DOCKER=${DIUN_PROVIDERS_DOCKER}"
+      - "DIUN_NOTIF_MATRIX_HOMESERVERURL=${DIUN_NOTIF_MATRIX_HOMESERVERURL}"
+      - "DIUN_NOTIF_MATRIX_USER=${DIUN_NOTIF_MATRIX_USER}"
+      - "DIUN_NOTIF_MATRIX_PASSWORD=${DIUN_NOTIF_MATRIX_PASSWORD}"
+      - "DIUN_NOTIF_MATRIX_ROOMID=${DIUN_NOTIF_MATRIX_ROOMID}"
+      - "DIUN_NOTIF_MATRIX_MSGTYPE=${DIUN_NOTIF_MATRIX_MSGTYPE}"
+      - "DIUN_NOTIF_MATRIX_TEMPLATEBODY=${DIUN_NOTIF_MATRIX_TEMPLATEBODY}"
+    labels:
+      - "diun.enable=true"
+      - "diun.watch_repo=true"
+    volumes:
+      - "data:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+
+
+volumes:
+  data:
